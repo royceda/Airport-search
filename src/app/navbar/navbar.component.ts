@@ -43,8 +43,7 @@ export class NavbarComponent implements OnInit {
   change(event: string) {
     if(event !== ""){
       this.query = event;
-      this.result = this.res.filter(airport => airport.iata_code.toString().includes(this.query.toUpperCase()) ); /*||
-                                               airport.municipality.toString().toLowerCase().includes(this.query.toLowerCase()) );*/
+      this.result = this.res.filter(airport => airport.iata_code.toString().includes(this.query.toUpperCase()) || airport.municipality.toString().toLowerCase().includes(this.query.toLowerCase()) );
       console.log(this.result)
       console.log(this.result.length) 
     } else {
