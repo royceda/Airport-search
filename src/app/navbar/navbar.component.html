@@ -1,0 +1,61 @@
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand">Aiport Search</a>
+    <div class="nav navbar-nav navbar-logo mx-auto col-lg-6">
+        <form class="form-inline " (ngSubmit)="onSubmit()">
+            <input class="form-control col-lg-8" type="search" placeholder="Search" aria-label="Search" (input)="change($event.target.value)">
+        </form>
+    </div>
+</nav>
+
+
+<hr>
+
+
+<div class="container">
+    <div class="list-group" *ngIf="result.length <= 0 || query.length <= 1">
+        <h2>Top Search: </h2>
+        <a href="#" class="list-group-item list-group-item-action" *ngFor='let airport of  result' (click)="open(content, airport)">
+        {{airport.iata_code}} -  {{airport.name}} , {{airport.municipality}}
+        </a>
+    </div>
+
+
+
+    <div class="list-group" *ngIf="result.length > 0 && query.length > 1">
+        <a href="#" class="list-group-item list-group-item-action" *ngFor='let airport of result' (click)="open(content, airport)">
+        {{airport.iata_code}} -  {{airport.name}} , {{airport.municipality}}
+        </a>
+    </div>
+
+</div>
+
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{current.name}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">{{current.iata_code}}</div>
+            <div class="card-body">
+                <p class="card-title">{{current.continent}}</p>
+                <p class="card-title">{{current.iso_country}}</p>
+            </div>
+        </div>
+        <agm-map [latitude]="current.lng" [longitude]="current.lat" [zoom]="4">
+            <agm-marker [latitude]="current.lng" [longitude]="current.lat" [label]="current.name">
+            </agm-marker>
+        </agm-map>
+    </div>
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">OK</button>
+    </div>
+</ng-template>

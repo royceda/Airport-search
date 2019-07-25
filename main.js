@@ -8,7 +8,8 @@ const url = require("url");
 let win;
 
 function createWindow() {
-    win = new BrowserWindow({ width: 1200, height: 600 });
+    //win = new BrowserWindow({ width: 1200, height: 600 });
+    win = new BrowserWindow({ width: 1200, height: 800, titleBarStyle: 'hidden' });
 
     // load the dist folder from Angular
     win.loadURL(
@@ -19,13 +20,13 @@ function createWindow() {
         })
     );
 
-    /*win.setTitle(new customTitlebar.Titlebar({
-        backgroundColor: customTitlebar.Color.fromHex('#444')
-    })) */
+
+    // win.setTitle();
 
     // The following is optional and will open the DevTools:
     // win.webContents.openDevTools()
 
+    win.center()
     win.on("closed", () => {
         win = null;
     });
@@ -33,6 +34,13 @@ function createWindow() {
     //win.webContents.openDevTools()
 
 }
+
+
+/*app.setTitle(new customTitlebar.Titlebar({
+    backgroundColor: customTitlebar.Color.fromHex('#444'),
+    shadow: true
+}));*/
+
 
 app.on("ready", createWindow);
 
