@@ -30,8 +30,6 @@
 </div>
 
 
-
-
 <ng-template #content let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">{{current.name}}</h4>
@@ -48,14 +46,17 @@
                 <p class="card-title">{{current.iso_country}}</p>
             </div>
         </div>
-        <agm-map [latitude]="current.lng" [longitude]="current.lat" [zoom]="4">
+        <!--<agm-map [latitude]="current.lng" [longitude]="current.lat" [zoom]="4">
             <agm-marker [latitude]="current.lng" [longitude]="current.lat" [label]="current.name">
             </agm-marker>
-        </agm-map>
+        </agm-map> -->
+        <app-map [lat]="current.lat" [long]="current.lng"></app-map>
     </div>
 
 
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">OK</button>
     </div>
+
+
 </ng-template>
